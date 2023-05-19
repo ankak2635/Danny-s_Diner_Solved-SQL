@@ -17,7 +17,7 @@ JOIN sales
 ON menu.product_id = sales.product_id
 )
 
-SELECT points_cte.customer_id, SUM(points_cte.points)
+SELECT points_cte.customer_id, SUM(points_cte.points) AS total_points
 FROM points_cte
 GROUP BY customer_id
 ORDER BY customer_id;
