@@ -5,6 +5,14 @@
 --SOLUTIONS:
 -------------
 
+-- 1. What is the total amount each customer spent at the restaurant?
+SELECT sales.customer_id, SUM(menu.price) AS amount_spent
+FROM sales
+JOIN menu
+ON sales.product_id = menu.product_id
+GROUP BY 1
+ORDER BY 2 DESC;
+
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
 WITH points_cte as(        -- cte to assign points
 SELECT *,
