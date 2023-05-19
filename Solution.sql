@@ -1,5 +1,5 @@
- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier -how many points would each customer have?
-```sql
+-- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
+
 WITH points_cte as(
 SELECT *,
 CASE
@@ -16,4 +16,4 @@ JOIN points_cte
 ON sales.product_id = points_cte.product_id
 GROUP BY sales.customer_id
 ORDER BY sales.customer_id;
-```
+
