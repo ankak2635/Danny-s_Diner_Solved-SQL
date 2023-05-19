@@ -36,7 +36,7 @@ FROM members
 points_cte as(
 SELECT date_cte.customer_id, 
 CASE
-	WHEN sales.order_date BETWEEN date_cte.join_date AND date_cte.valid_date THEN menu.price *20
+    WHEN sales.order_date BETWEEN date_cte.join_date AND date_cte.valid_date THEN menu.price *20
     WHEN menu.product_id = 1 then menu.price* 20
     ELSE menu.price*10 END
     AS points
