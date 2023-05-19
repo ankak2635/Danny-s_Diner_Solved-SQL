@@ -1,5 +1,11 @@
--- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
+-- Author: Ankit Kumar
+-- Tool: PostgreSQL
 
+-------------
+--SOLUTIONS:
+-------------
+
+-- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
 WITH points_cte as(
 SELECT *,
 CASE
