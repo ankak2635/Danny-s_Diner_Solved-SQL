@@ -13,6 +13,24 @@ ON sales.product_id = menu.product_id
 GROUP BY 1
 ORDER BY 2 DESC;
 
+-- 2. How many days has each customer visited the restaurant?
+SELECT customer_id, COUNT(DISTINCT order_date) AS days_visited
+FROM sales
+GROUP BY 1;
+
+ --3. What was the first item from the menu purchased by each customer?
+ WITH rank_cte as(
+ SELECT sales.customer_id, menu.product_name,
+ DENSE_RANK() OVER(PARTITION BY sales.customer_id ORder BY sales.order_date) AS ranking
+ FROM sales
+ JOIN menu 
+ ON sales.product_id = menu.product_id
+ )
+ SELECT customer_id, product_name
+ FROM rank_cte
+ WHERE ranking =1 
+ GROUP by 1,2;
+
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
 WITH points_cte as(        -- cte to assign points
 SELECT *,
