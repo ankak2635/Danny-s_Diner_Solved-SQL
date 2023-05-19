@@ -16,7 +16,6 @@ FROM menu
 JOIN sales
 ON menu.product_id = sales.product_id
 )
-
 SELECT points_cte.customer_id, SUM(points_cte.points) AS total_points
 FROM points_cte
 GROUP BY customer_id
@@ -30,7 +29,6 @@ DATE (join_date + INTERVAL '6 DAYS') as valid_date,
 DATE ('2021-01-31') as end_date    
 FROM members
 ),
-
 points_cte as(               -- another cte to assign points
 SELECT date_cte.customer_id, 
 CASE
@@ -44,8 +42,7 @@ CASE
  JOIN menu
  ON sales.product_id = menu.product_id
  WHERE sales.order_date <= date_cte.end_date
- )
-  
+ )  
  SELECT customer_id, sum(points) AS Points_till_Jan_end
  FROM points_cte
  GROUP BY customer_id
