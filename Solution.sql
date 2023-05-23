@@ -40,6 +40,19 @@ GROUP BY 1
 order by 2 DESC
 LIMIT 1;
 
+--5. Which item was the most popular for each customer?
+WITH rank_cte AS(
+SELECT customer_id, product_name, COUNT(sales.product_id) as times_ordered,
+DENSE_RANK() OVER(PARTITION by sales.customer_id ORDER by COUNT(sales.product_id) DESC) AS ranking
+FROM menu
+JOIN sales
+ON menu.product_id = sales.product_id    
+GROUP by 1, 2
+)
+SELECT customer_id, product_name, times_ordered
+FROM rank_cte
+WHERE ranking = 1;
+
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
 WITH points_cte as(        -- cte to assign points
 SELECT *,
