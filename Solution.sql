@@ -54,7 +54,7 @@ FROM rank_cte
 WHERE ranking = 1;
 
 -- 6. Which item was purchased first by the customer after they became a member?
--- Assumption: Customer orderd food after becoming a memmber on join date
+-- Assumption: Customer orderd food after becoming a member on join date
 WITH rank_cte as(
 SELECT sales.customer_id, members.join_date, menu.product_name, sales.order_date, 
 DENSE_RANK() OVER(PARTITION by sales.customer_id ORDER BY sales.order_date) as ranking
@@ -70,7 +70,7 @@ FROM rank_cte
 WHERE ranking =1;
 
 -- 7. Which item was purchased just before the customer became a member?
-Assumption: Excluding the day when customer became a member, so we are looking for last order before the join date
+-- Assumption: Excluding the day when customer became a member, so we are looking for last order before the join date
 WITH rank_cte as(
 SELECT sales.customer_id, members.join_date, menu.product_name, sales.order_date, 
 DENSE_RANK() OVER(PARTITION by sales.customer_id ORDER BY sales.order_date DESC) as ranking
