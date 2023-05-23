@@ -30,6 +30,15 @@ GROUP BY 1;
  FROM rank_cte
  WHERE ranking =1 
  GROUP by 1,2;
+ 
+ --4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+SELECT product_name, count(menu.product_id) as times_ordered
+FROM menu
+JOIN sales
+ON menu.product_id = sales.product_id    
+GROUP BY 1
+order by 2 DESC
+LIMIT 1;
 
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
 WITH points_cte as(        -- cte to assign points
