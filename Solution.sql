@@ -85,6 +85,15 @@ SELECT customer_id, join_date, product_name, order_date
 FROM rank_cte
 WHERE ranking =1;
 
+-- 8. What is the total items and amount spent for each member before they became a member?
+SELECT sales.customer_id, COUNT(DISTINCT sales.product_id) AS item_count, sum(menu.price) as amount_spent
+FROM menu
+JOIN sales
+ON sales.product_id = menu.product_id
+JOIn members
+ON sales.customer_id = members.customer_id
+WHERE sales.order_date < members.join_date
+GROUP BY sales.customer_id;
 
 -- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
 WITH points_cte as(        -- cte to assign points
