@@ -1,5 +1,3 @@
-CREATE SCHEMA dannys_diner;
-SET search_path = dannys_diner;
 
 CREATE TABLE sales (
   "customer_id" VARCHAR(1),
